@@ -2,11 +2,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react'
 
-// function dateTransform(value) {
-//   var s = value.toString().split('-');
-//   if(s[0] <=31 && s[0] >=1) {return [s[0],s[1],s[2]].join('/');}
-//   else return [s[2],s[1],s[0]].join('/');
-// } 
 
 class OneRowData extends Component {
   

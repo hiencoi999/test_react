@@ -12,7 +12,8 @@ class App extends Component {
     super(props);
     this.state = {
       students : [],
-      isDisplayAddFrom : false
+      isDisplayAddFrom : false,
+      fillter : []
     }
   }
 
@@ -81,10 +82,52 @@ class App extends Component {
     this.onCloseAddFrom();
   }
 
-  render() {
-      var {students, isDisplayAddFrom} = this.state;
-      var elmAddForm = isDisplayAddFrom ?  <AddForm onSubmit={this.onSubmit} onCloseAddForm= {this.onCloseAddFrom}/> : '';
+  onFillter =(name, value) => {
+    // console.log(name + '- ' + value + '\n');
+    this.setState ({
+      fillter : {
+        [name] : value
+      }
+    }); 
+  }
 
+  render() {
+      var {students, isDisplayAddFrom, fillter} = this.state;
+      //console.log(fillter.fillterStatus);
+      if(fillter) {
+        if(fillter.fillterMsv) {
+          students = students.filter((student) => {
+            return student.msv.indexOf(fillter.fillterMsv) === 0;
+          })
+        }
+        if(fillter.fillterName) {
+          students = students.filter((student) => {
+            return student.name.indexOf(fillter.fillterName) !== -1;
+          })
+        }
+        if(fillter.fillterGender) {
+          students = students.filter((student) => {
+            return student.gender === fillter.fillterGender;
+          })
+        }
+        if(fillter.fillterMark) {
+          students = students.filter((student) => {
+            if(fillter.fillterMark === 'all') return true; 
+            else if(fillter.fillterMark === '2.0') return student.mark < 2.0;
+            else {
+              var mark = fillter.fillterMark.toString().split('-');
+              return (student.mark > mark[0] && student.mark <= mark[1]);
+            }
+            })
+        }
+        if(fillter.fillterStatus) {
+          students = students.filter((student) => {
+            if(fillter.fillterStatus === 'Tất cả') return true; 
+            else return student.status === fillter.fillterStatus;
+          })
+        }
+      }
+      var elmAddForm = isDisplayAddFrom ?  <AddForm onSubmit={this.onSubmit} onCloseAddForm= {this.onCloseAddFrom}/> : '';
       return (
         <div className="Container">
           <div className="text_center">
@@ -102,7 +145,7 @@ class App extends Component {
                 <SearchSort />
                 <div className="row">
                   <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <ListSV student={students} onDelete={this.onDelete}/>
+                    <ListSV student={students} onDelete={this.onDelete} onFillter={this.onFillter} />
                   </div>
                 </div> 
             </div>

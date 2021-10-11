@@ -66,15 +66,15 @@ class AddForm extends Component {
                         <label>Giới tính:</label>
                         <select className="form-control" name="gender" value={this.state.gender} onChange={this.onChange}>
                             <option>--Select--</option>
-                            <option value="nam">Nam</option>
-                            <option value="nu">Nữ</option>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
                         </select>
-                        <label>Điểm: </label>
+                        <label>GPA: </label>
                         <input type="text" className='form-control' name="mark" value={this.state.mark} onChange={this.onChange}/>
                         <label>Trạng thái: </label>
                         <select className="form-control" name="status" value={this.state.status} onChange={this.onChange}>
                             <option>--Select--</option>
-                            <option value='khong'>Không </option>
+                            <option value='Không'>Không </option>
                             <option value='Nguy cơ nghỉ học'>Nguy cơ nghỉ học</option>
                             <option value='Cảnh báo học vụ'>Cảnh báo học vụ</option>
                             <option value='Thiếu tín chỉ'>Thiếu tín chỉ</option>
